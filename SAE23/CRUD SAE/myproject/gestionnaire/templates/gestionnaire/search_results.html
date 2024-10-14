@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats de recherche</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style6.css' %}">
+<body>
+    <h1>Résultats de recherche</h1>
+
+    {% if results %}
+        {% if results.enseignants %}
+            <h2>Résultats pour les enseignants :</h2>
+            <ul>
+                {% for enseignant in results.enseignants %}
+                    <li>{{ enseignant.nom }} {{ enseignant.prenom }}</li>
+                {% empty %}
+                    <li>Aucun enseignant trouvé.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if results.examens %}
+            <h2>Résultats pour les examens :</h2>
+            <ul>
+                {% for examen in results.examens %}
+                    <li>{{ examen.titre }} - {{ examen.date }}</li>
+                {% empty %}
+                    <li>Aucun examen trouvé.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if results.notes %}
+            <h2>Résultats pour les notes :</h2>
+            <ul>
+                {% for note in results.notes %}
+                    <li>Note {{ note.note }} - {{ note.etudiant.nom }} {{ note.etudiant.prenom }}</li>
+                {% empty %}
+                    <li>Aucune note trouvée.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if results %}
+    {% if results.ressources %}
+        <h2>Résultats pour les ressources :</h2>
+        <ul>
+            {% for ressource in results.ressources %}
+                <li>
+                    <strong>Nom :</strong> {{ ressource.nom }}<br>
+                    <strong>Descriptif :</strong> {{ ressource.descriptif }}<br>
+                    <strong>Coefficient :</strong> {{ ressource.coefficient }}
+                </li>
+            {% empty %}
+                <li>Aucune ressource trouvée.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if results.unites %}
+        <h2>Résultats pour les unités d'enseignement :</h2>
+        <ul>
+            {% for unite in results.unites %}
+                <li>
+                    <strong>Nom :</strong> {{ unite.nom }}<br>
+                    <strong>Semestre :</strong> {{ unite.semestre }}<br>
+                    <strong>Crédit ECTS :</strong> {{ unite.credit_ects }}
+                </li>
+            {% empty %}
+                <li>Aucune unité d'enseignement trouvée.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if results.etudiants %}
+        <h2>Résultats pour les étudiants :</h2>
+        <ul>
+            {% for etudiant in results.etudiants %}
+                <li>
+                    <strong>Nom :</strong> {{ etudiant.nom }}<br>
+                    <strong>Prénom :</strong> {{ etudiant.prenom }}<br>
+                    <strong>Groupe :</strong> {{ etudiant.groupe }}<br>
+                    <strong>Photo :</strong> <img src="{{ etudiant.photo.url }}" alt="{{ etudiant.nom }}" width="100" height="100"><br>
+                    <strong>Email :</strong> {{ etudiant.email }}
+                </li>
+            {% empty %}
+                <li>Aucun étudiant trouvé.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+
+    {% else %}
+        <p>Aucun résultat trouvé.</p>
+    {% endif %}
+</body>
+</html>

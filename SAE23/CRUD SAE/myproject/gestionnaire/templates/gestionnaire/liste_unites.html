@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des unités d'enseignement</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Accueil du CRUD Unités d'Enseignement</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'liste_unites' %}">Liste des unités d'enseignement</a></li>
+            <li><a href="{% url 'ajouter_unite' %}">Ajouter une unité d'enseignement</a></li>
+            <!-- Ajoutez ici d'autres liens de navigation -->
+        </ul>
+    </nav>
+  </header>
+    {% block content %}
+    <div class="container">
+      <h2 class="liste-etudiants-title">Liste des unités d'enseignement</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Nom</th>
+            <th>Semestre</th>
+            <th>Crédit ECTS</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for unite in unites %}
+            <tr>
+              <td>{{ unite.code }}</td>
+              <td>{{ unite.nom }}</td>
+              <td>{{ unite.semestre }}</td>
+              <td>{{ unite.credit_ects }}</td>
+              <td>
+                <a href="{% url 'modifier_unite' unite.code %}">
+                  <i class="fas fa-edit">____</i>
+                </a>
+                <a href="{% url 'supprimer_unite' unite.code %}"> 
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endblock %}
+</body>
+</html>
+

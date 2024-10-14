@@ -1,0 +1,6 @@
+print(" Veuillez entrez une valeur x ")
+x = int(input())
+print(" Veuillez entrez une valeur y ")
+y = int(input())
+print(" avant permutation : \n x : ", x, " \n y : ", y)
+print(" après permutation : \n x : ", y, " \n y : ", x)

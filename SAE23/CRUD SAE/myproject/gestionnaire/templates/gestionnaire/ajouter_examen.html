@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter un examen</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Accueil du CRUD Examen</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'liste_examens' %}">Liste des examens</a></li>
+            <li><a href="{% url 'ajouter_examen' %}">Ajouter un examen</a></li>
+            <!-- Ajoutez ici d'autres liens de navigation -->
+        </ul>
+    </nav>
+</header>
+    {% block content %}
+      <div class="container">
+        <h2 class="form-title">Ajouter un examen</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="titre">Titre:</label>
+            <input type="text" name="titre" id="titre" required>
+          </div>
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="text" name="date" id="date" required>
+          </div>
+          <div class="form-group">
+            <label for="coefficient">Coefficient:</label>
+            <input type="number" name="coefficient" id="coefficient" required>
+          </div>
+          <button type="submit">Ajouter</button>
+        </form>
+      </div>
+    {% endblock %}
+</body>
+</html>

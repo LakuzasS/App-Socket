@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des notes</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Accueil du CRUD Notes</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'liste_notes' %}">Liste des notes</a></li>
+            <li><a href="{% url 'ajouter_note' %}">Ajouter une note</a></li>
+            <!-- Ajoutez ici d'autres liens de navigation -->
+        </ul>
+    </nav>
+</header>
+    {% block content %}
+    <div class="container">
+      <h2 class="liste-notes-title">Liste des notes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Examen</th>
+            <th>Étudiant</th>
+            <th>Note</th>
+            <th>Appréciation</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for note in notes %}
+            <tr>
+              <td>{{ note.examen }}</td>
+              <td>{{ note.etudiant }}</td>
+              <td>{{ note.note }}</td>
+              <td>{{ note.appreciation }}</td>
+              <td>
+                <a href="{% url 'modifier_note' note.id %}">
+                  <i class="fas fa-edit">____</i>
+                </a>
+                <a href="{% url 'supprimer_note' note.id %}"> 
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endblock %}
+</body>
+</html>

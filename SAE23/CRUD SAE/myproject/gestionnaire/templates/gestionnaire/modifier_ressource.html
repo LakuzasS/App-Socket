@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier une ressource</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Accueil du CRUD Ressource</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'liste_ressources' %}">Liste des ressources</a></li>
+            <li><a href="{% url 'ajouter_ressource' %}">Ajouter une ressource</a></li>
+            <!-- Ajoutez ici d'autres liens de navigation -->
+        </ul>
+    </nav>
+</header>
+  {% block content %}
+  <div class="container">
+    <h2 class="modifier-ressource-title">Modifier la ressource</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="code_ressource" value="{{ ressource.code_ressource }}">
+      <input type="text" name="nom" value="{{ ressource.nom }}" required>
+      <textarea name="descriptif" rows="4" cols="50" placeholder="Descriptif" required>{{ ressource.descriptif }}</textarea>
+      <input type="number" name="coefficient" placeholder="Coefficient" value="{{ ressource.coefficient }}" required>
+      <div class="btn-container">
+          <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+          <a href="{% url 'liste_ressources' %}" class="btn-cancel">
+            <button type="button"><span class="arrow">&#8592;</span> Annuler</button>
+          </a>
+      </div>
+  </form>
+  
+  </div>
+  {% endblock %}
+</body>
+</html>

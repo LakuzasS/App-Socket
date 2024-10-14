@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choisir l'étudiant</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+  <style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+     .container2 {
+      margin-left: 100px;
+    }
+  </style>
+  <header>
+    <h1>Choisir l'étudiant</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <!-- Ajoutez ici d'autres liens de navigation -->
+        </ul>
+    </nav>
+  </header>
+  <div class="container">
+  <form method="post" action="{% url 'choose_student' %}">
+    {% csrf_token %}
+    <label for="student_id">ID de l'étudiant:</label>
+    <div class="form-group">
+      <input type="text" name="student_id" id="student_id">
+    </div>
+    <button type="submit">Rechercher</button>
+  </form>
+  </div>
+
+  <div class="container2">
+  {% if etudiant %}
+    <h2>Informations sur l'étudiant</h2>
+    <p>ID: {{ etudiant.numero_etudiant }}</p>
+    <p>Nom: {{ etudiant.nom }}</p>
+    <p>Prénom: {{ etudiant.prenom }}</p>
+    <p>Groupe: {{ etudiant.groupe }}</p>
+    <p>Email: {{ etudiant.email }}</p>
+
+    <a href="{% url 'generate_transcript' etudiant.numero_etudiant %}" download="releve_notes.pdf">
+      <button>Télécharger le relevé de notes</button>
+    </a>
+  </div>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des capteurs</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+      setTimeout(function() {
+          location.reload();
+      }, 20000); 
+    </script>
+    <style>
+        .filter-button-container {
+            margin-bottom: 10px;
+        }
+        
+        #filterButton {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .filter-menu {
+            display: none;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .filter-options {
+            margin-bottom: 10px;
+        }
+        
+        .filter-options label {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .filter-options select {
+            padding: 4px;
+            font-size: 14px;
+        }
+        
+        .filter-options button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .filter-section {
+          margin-bottom: 20px;
+        }
+      
+        .filter-container {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      
+        .filter-container input[type="text"] {
+          padding: 5px;
+          width: 300px;
+        }
+      
+        .filter-container button[type="submit"] {
+          padding: 5px 10px;
+          background-color: #ccc;
+          border: none;
+          cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+      setTimeout(function() {
+          location.reload();
+      }, 10000); 
+      
+      function toggleFilterMenu() {
+        var filterMenu = document.getElementById('filterMenu');
+        filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+      }
+
+      function applyFilters() {
+        var attribute = document.getElementById('selectAttribute').value;
+        var order = document.getElementById('selectOrder').value;
+        var url = "{% url 'liste_donnees' %}?attribute=" + attribute + "&order=" + order;
+        location.href = url;
+      }
+    </script>
+</head>
+<body>
+  <header>
+    <h1>Accueil du CRUD Capteur</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Accueil</a></li>
+            <li><a href="{% url 'liste_capteurs' %}">Liste des capteurs</a></li>
+            <li><a href="{% url 'ajouter_capteur' %}">Ajouter un capteur</a></li>
+        </ul>
+    </nav>
+  </header>
+    {% block content %}
+    <div class="container">
+      <h2 class="liste-capteurs-title">Liste des capteurs</h2>
+      <div class="filter-button-container">
+        <button id="filterButton" onclick="toggleFilterMenu()">
+          <i class="fas fa-filter"></i>
+          Filtre
+        </button>
+      </div>
+      
+      <div class="filter-menu" id="filterMenu">
+        <div class="filter-options">
+          <label for="selectAttribute">Attribut :</label>
+          <select id="selectAttribute">
+            <option value="id">ID</option>
+            <option value="nom">Nom</option>
+            <option value="piece">Pièce</option>
+            <option value="emplacement">Emplacement</option>
+          </select>
+        </div>
+        <div class="filter-options">
+          <label for="selectOrder">Ordre :</label>
+          <select id="selectOrder">
+            <option value="asc">Croissant</option>
+            <option value="desc">Décroissant</option>
+          </select>
+        </div>
+        <button onclick="applyFilters()">Appliquer</button>
+      </div>
+      <div class="filter-section">
+        <form method="GET">
+          <input type="text" name="filter_query" id="filter_query" value="{{ request.GET.filter_query }}">
+          <button type="submit">Rechercher</button>
+        </form>
+      </div>       
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Pièce</th>
+            <th>Emplacement</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for capteur in capteurs %}
+            <tr>
+              <td>{{ capteur.id }}</td>
+              <td>{{ capteur.nom }}</td>
+              <td>{{ capteur.piece }}</td>
+              <td>{{ capteur.emplacement }}</td>
+              <td>
+                <a href="{% url 'modifier_capteur' capteur.id %}">
+                  <i class="fas fa-edit">____</i>
+                </a>
+                <a href="{% url 'supprimer_capteur' capteur.id %}">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endblock %}
+  <script>
+    function toggleFilterMenu() {
+      var filterMenu = document.getElementById('filterMenu');
+      filterMenu.style.display = filterMenu.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function applyFilters() {
+      var attribute = document.getElementById('selectAttribute').value;
+      var order = document.getElementById('selectOrder').value;
+      var url = "{% url 'liste_capteurs' %}?attribute=" + attribute + "&order=" + order;
+      location.href = url;
+    }
+  </script>
+</body>
+</html>

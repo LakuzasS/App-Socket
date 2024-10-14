@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transcript</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Transcript for {{ student.nom }} {{ student.prenom }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Exam</th>
+                <th>Note</th>
+                <th>Appreciation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for note in notes %}
+            <tr>
+                <td>{{ note.examen.titre }}</td>
+                <td>{{ note.note }}</td>
+                <td>{{ note.appreciation }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+

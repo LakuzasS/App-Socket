@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier un examen</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Accueil du CRUD Examen</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'liste_examens' %}">Liste des examens</a></li>
+            <li><a href="{% url 'ajouter_examen' %}">Ajouter un examen</a></li>
+            <!-- Ajoutez ici d'autres liens de navigation -->
+        </ul>
+    </nav>
+  </header>
+  {% block content %}
+  <div class="container">
+    <h2 class="modifier-examen-title">Modifier l'examen</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="btn-container">
+            <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+            <a href="{% url 'liste_examens' %}" class="btn-cancel">
+              <button type="button"><span class="arrow">&#8592;</span> Annuler</button>
+            </a>
+        </div>
+    </form>
+  </div>
+  {% endblock %}
+</body>
+</html>

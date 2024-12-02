@@ -1,4 +1,9 @@
 # 🌟 **Présentation de la Solution Radisson Group** 🌟
+## Design et expérience
+
+"Tous nos équipements technologiques sont pensés pour se fondre parfaitement dans vos chambres. Les téléviseurs 8K s’intègrent dans le décor comme des œuvres d’art. Les tablettes et enceintes, au design minimaliste, ne dénaturent pas l’élégance de votre mobilier, tout en offrant une technologie de pointe"
+
+"Pour enrichir l’expérience, nos solutions offrent du contenu multimédia sur-mesure. Chaque client peut accéder à des vidéos à la demande, des suggestions locales ou des messages personnalisés qui renforcent leur sentiment d’attention et d’exclusivité."
 
 ## ⏱️ **Introduction : 20 secondes**
 
